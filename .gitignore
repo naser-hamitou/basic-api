@@ -16,6 +16,7 @@ out/
 *.iml
 *.iws
 *.ipr
+*.xml
 
 ############################
 # Logs / runtime files
