@@ -1,0 +1,47 @@
+############################
+# Maven / Gradle builds
+############################
+target/
+build/
+out/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle/
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+############################
+# IntelliJ IDEA
+############################
+.idea/
+*.iml
+*.iws
+*.ipr
+
+############################
+# Logs / runtime files
+############################
+logs/
+*.log
+*.log.*
+hs_err_pid*
+replay_pid*
+
+############################
+# Java / build artifacts
+############################
+*.class
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+############################
+# Spring Boot / temp
+############################
+.tmp/
+*.tmp
+*.swp
+*.swo
+
