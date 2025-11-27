@@ -2,7 +2,10 @@ package com.example.basic_api.service;
 
 import com.example.basic_api.entity.Task;
 import com.example.basic_api.exception.TaskNotFoundException;
+import com.example.basic_api.mapper.TaskDtoToTask;
+import com.example.basic_api.model.CreateTaskDto;
 import com.example.basic_api.repository.TaskRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +16,12 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final TaskDtoToTask taskDtoToTask;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, TaskDtoToTask taskDtoToTask) {
         this.taskRepository = taskRepository;
+        this.taskDtoToTask = taskDtoToTask;
     }
 
     public List<Task> findAll() {
@@ -45,7 +50,7 @@ public class TaskService {
                 () -> new TaskNotFoundException("Task not found with id: " + id));
         task.setTitle(title);
         task.setDescription(description);
-        task.setIsCompleted(isCompleted);
+        task.setCompleted(isCompleted);
 
         return taskRepository.save(task);
     }
@@ -59,5 +64,8 @@ public class TaskService {
         return task;
     }
 
+    public Task createTask (CreateTaskDto newTask) {
+        return  taskRepository.save(taskDtoToTask.createTaskDtoToTask(newTask));
+    }
 
 }
