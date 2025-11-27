@@ -1,6 +1,8 @@
 package com.example.basic_api.controller;
 
 import com.example.basic_api.entity.Task;
+import com.example.basic_api.model.CreateTaskDto;
+import com.example.basic_api.model.TaskDto;
 import com.example.basic_api.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,7 @@ import java.util.List;
 @RequestMapping("api/tasks")
 public class TodoController {
 
-    private TaskService taskService;
+    private final TaskService taskService;
 
     @Autowired
     public TodoController(TaskService taskService) {
@@ -31,5 +33,20 @@ public class TodoController {
         return taskService.findById(id);
     }
 
-    // TODO: Create task, delete task, complete task, modify task,
+    @PostMapping
+    public Task createTast(@RequestBody CreateTaskDto createTaskDto) {
+        return taskService.createTask(createTaskDto);
+    }
+
+    @PostMapping("/{id}")
+    public Task deleteTask(@PathVariable Long id) {
+        return taskService.deleteTask(id);
+    }
+
+    @PatchMapping
+    public Task modifyTask(@RequestBody TaskDto modifiedTask) {
+        return taskService.updateTask(modifiedTask.getId(), modifiedTask.getTitle(),
+                modifiedTask.getDescription(), modifiedTask.isCompleted());
+    }
+
 }

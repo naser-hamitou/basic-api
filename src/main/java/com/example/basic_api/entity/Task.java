@@ -19,5 +19,5 @@ public class Task {
     private String description;
 
     @Column(nullable = false)
-    private Boolean isCompleted;
+    private Boolean completed = false;
 }
